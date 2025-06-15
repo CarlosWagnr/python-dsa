@@ -114,4 +114,3 @@ print(cidades)
 cidades.sort()
 print(cidades)
 
-# %%

@@ -2,7 +2,6 @@
 # Exercício 1 - Imprima na tela os números de 1 a 10. Use uma lista para armazenar os números.
 
 
-
 # %%
 # Exercício 2 - Crie uma lista de 5 objetos e imprima na tela
 

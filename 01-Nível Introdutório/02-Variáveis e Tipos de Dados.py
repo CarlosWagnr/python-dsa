@@ -94,4 +94,3 @@ print(f"Quantas letras 'a' tem na string: {saudacao.count('a')}")
 print("Python == R:", "Python" == "R")
 print("Python == Python:", "Python" == "Python")
 
-# %%

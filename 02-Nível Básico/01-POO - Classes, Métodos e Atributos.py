@@ -151,3 +151,132 @@ Circ1.area()
 print(f"O novo raio é igual a {Circ1.getRaio()}")
 
 # %%
+# Herança
+# Em Programação Orientada a Objetos (POO), a herança é um concenito que permite criar novas classes a partir de outras classes existentes, aproveitando os atributos e métodos da classe original e adicionando novos atributos e métodos específicos.
+
+# A classe original é chamada de classe mãe ou superclasse e a nova classe criada é chamada de classe filha ou subclasse.
+
+# A herança é uma técnica importante em POO porque permite reutilizar o código de maneira eficiente. Em vez de criar uma nova classe do zero, a subclasse pode herdar todos os atributos e métodos da superclasse e adicionar apenas o que é necessário. Desta forma, a subclasse pode se concentrar em fornecer funcionalidades adicionais sem precisar se preocupar coom as características básicas da classe.
+
+# Na herança, uma subclasse pode herdar os atributos e métodos da superclasse e substituí-los ou estendê-los conforme necessário. Por exemplo, uma subclasse pode ter um método com o mesmo nome da superclasse, mas com comportamento diferente.
+
+# Criando uma classe Animal - Super-classe
+class Animal:
+    
+    def __init__(self):
+        print("Animal criado")
+    
+    def imprimir(self):
+        print("Este é um animal")
+    
+    def comer(self):
+        print("Hora de comer!")
+        
+    def emitir_som(self):
+        pass
+
+
+# %%
+# Criando classe Cachorro - Sub-classe da classe Animal
+class Cachorro(Animal):
+    
+    def __init__(self):
+        Animal.__init__(self) # Inicia o construtor da super classe
+        print("Objeto Cachorro criado!")
+        
+    def emitir_som(self):
+        print("Au au!")
+
+cao = Cachorro()
+cao.emitir_som()
+cao.comer()
+
+# %%
+# Criando classe Gato - Sub-classe
+class Gato(Animal):
+    
+    def __init__(self):
+        Animal.__init__(self)
+        print("Objeto Gato criado!")
+        
+    def emitir_som(self):
+        print("Miau!")
+
+cat = Gato()
+cat.emitir_som()
+cat.imprimir()
+
+# %%
+# Polimorfismo
+# Polimorfismo é um dos conceitos fundamentais da Programação Orinetada a Objetos (POO). O polimorfismo permite que objetos de diferentes classes possam ser tratados de forma uniforme. Isso significa que um objeto pode ser tratado como se fosse um objeto de uma superclasse, mesmo que ele seja de uma subclasse.
+
+# Mais especificamente, o polimorfismo se refere à habilidade de um objeto responder de diferentes formas a uma mesma mensagem. Isso é possível porque as subclasses podem implementar métodos com o mesmo nome que os métodos da superclasse, mas com comportamentos diferentes.
+
+# Com o polimorfismo, os mesmo atributos e métodos podem ser utilizados em objetos distintos, porém, com implementações lógicas diferentes.
+
+# Superclasse
+class Veiculo:
+    
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def acelerar(self):
+        pass
+
+    def frear(self):
+        pass
+
+# %%
+# Subclasse
+class Carro(Veiculo):
+
+    def acelerar(self):
+        print("O carro está acelerando.")
+
+    def frear(self):
+        print("O carro está freando")
+
+
+# %%
+# Subclasse
+class Moto(Veiculo):
+
+    def acelerar(self):
+        print("A moto está acelerando.")
+
+    def frear(self):
+        print("A moto está freando")
+
+# %%
+# Subclasse
+class Aviao(Veiculo):
+
+    def acelerar(self):
+        print("O avião está acelerando.")
+
+    def frear(self):
+        print("O avião está freando")
+
+    def decolar(self):
+        print("O avião está decolando.")
+
+# %%
+# Cria os objetos
+lista_veiculos = [Carro("Porshe", "911 Turbo"), Moto("Honda", "CB 1000R Black Edition"), Aviao("Boeing", "757")]
+
+# Loop
+for item in lista_veiculos:
+    
+    # O método acelerar tem comportamento diferente dependendo do tipo do objeto
+    item.acelerar()
+    
+    # O método frear tem comportamento diferente dependendo do tipo do objeto
+    item.frear()
+    
+    # Executando o método decolar somente se o objeto for instância da classe Aviao
+    if isinstance(item, Aviao):
+        item.decolar()
+        
+    print("---")
+

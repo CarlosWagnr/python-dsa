@@ -136,6 +136,7 @@ class Hangman:
               print(letra,)
           
           print()
+          print("Letras corretas: ",)
 
           for letra in self.letras_escolhidas:
               print(letra,)

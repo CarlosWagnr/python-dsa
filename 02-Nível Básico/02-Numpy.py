@@ -75,3 +75,62 @@ print(np.linspace(0, 10))
 print(np.logspace(0, 5, 10))
 
 # %%
+# Manipulando Matrizes
+arr9 = np.array([[1, 2, 3], [4, 5, 6]])
+print("Criando um Matriz:\n", arr9)
+print("\nVerificando o formato do array:", arr9.shape)
+
+# Criando uma matriz 2x3 apenas com números "1"
+arr10 = np.ones((2, 3))
+print("Matriz de apenas números '1'.\n", arr10)
+
+# %%
+# Listas de listas
+lista = [[13, 81, 22], [0, 34, 59], [21, 48, 94]]
+
+# A função 'matrix' cria uma matriz a partir de uma lista de listas
+arr11 = np.matrix(lista)
+print("\nVerificando o formato do array:", arr11.shape)
+print(arr11)
+
+print("\nTamanho da matriz:", arr11.size)
+
+print("Imprimindo os elementos da coluna 1 e índice 2:", arr11[1,2])
+
+# %%
+# Forçando a criação da matrix com tipo específico de dados
+arr12 = np.array([[24, 76, 92, 14], [47, 35, 89, 2]], dtype=float)
+print("Tipo da matrix:", arr12.dtype)
+print("Array criado com os dados em float.\n.", arr12)
+
+# %%
+# O itemsize de um array numpy é um atributo que retorna um tamanho em byte de cada elemento do array. Em outras palavras, o itemsize representa o número de bytes necessários para armazenar cada valor do array numpy.
+
+print("Tamanho em bytes para armazenar a matrix: ", arr12.itemsize)
+print("Tamanho em nbytes para armazenar a matrix: ", arr12.nbytes)
+print("Número de dimensões da matrix: ", arr12.ndim)
+
+
+# %%
+# Manipulando objetos de 3 e 4 Dimensões com Numpy
+arr_3d = np.array([
+    [
+        [1, 2, 3, 4],
+        [5, 6, 7, 8],
+        [9, 10, 11, 12]
+    ],
+    [
+        [13, 14, 15, 16],
+        [17, 18, 19, 20],
+        [21, 22, 23, 24]
+    ]
+])
+
+print("Número de dimensões da matrix: ", arr_3d.ndim)
+print("\nVerificando o formato do array:", arr_3d.shape)
+print(arr_3d)
+print("\nDimensão, linha, coluna: [0, 2, 1] =",arr_3d[0, 2, 1])
+
+# %%
+# Manipulando Arquivos com Numpy
+

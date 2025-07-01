@@ -133,4 +133,104 @@ print("\nDimensão, linha, coluna: [0, 2, 1] =",arr_3d[0, 2, 1])
 
 # %%
 # Manipulando Arquivos com Numpy
+import os
+filename = os.path.join("arquivos/dataset.csv")
 
+# Carregando dataset para dentro de um array de um mesmo tipo
+arr13 = np.loadtxt(filename, delimiter=",", usecols=(0, 1, 2, 3), skiprows=1)
+print(arr13)
+
+# %%
+# Análise Estatística Básica com Numpy
+arr14 = np.array([15, 23, 63, 94, 75])
+
+print("A média do array é:", np.mean(arr14))
+
+# O desvio padrão é uma media útil porque permite avaliar a variabilidade dos dados em torno da média. Se os valores estiverem próximos da média, o desvio padrão será baixo, indicando que os dados tem pouca variabilidade. por outro laso, se os valores estiverem muito distantes da média, o desvio padrão poderá ser alto, indicando que os dados tem alta variabilidade.
+print("O desvio padrão do array é:", np.std(arr14))
+
+# A variância é uma média estatística que quantifica a dispersão dos valores em um conjunto de dados em relação a média. Ela é calculada com a média dos quadrados das diferenças entre cada valor e a média.
+print("A variância do array é:", np.var(arr14))
+
+# Quando Usar Desvio Padrão ou Variância?
+
+# Tanto a variância quanto o desvio padrão são medidas úteis de dispersão e podem ser usados em conjunto para descrever a distribuição de um conjunto de dados.
+
+# Avariância é uma medida quadrática e pode ser útil para calcular outras estatísticas, como o desvio padrão. No entanto, como a variância é uma medida quadrática, seus valores são geralmente maiores do que os valores dos próprios dados, o que pode dificultar a interpretação. O desvio padrão é a raiz quadrada da variância e fornece uma medida de dispersão que tem a mesma unidade de medida que os próprios dados, facilitando a interpretação e a comparação com outros valores.
+
+# Em geral, o desvio padrão é mais comumente usado do que a variância, principalmente porque é mais fácil de interpretar. No entanto, a escolha entre o uso da variância ou do desvio padrão depende do contexto e do objetivo da análise. Em alguns casos, a variância pode ser uma medida  mais  apropriada,  como  quando  se  pretende  calcular  outras  estatísticas,  como  a covariância ou o coeficiente de correlação. Em outros casos, o desvio padrão pode ser uma medida mais apropriada, como quando se pretende avaliar a consistência dos dados em relação à média e comparar diferentes conjuntos de dados
+
+# %%
+# Operações Matemáticas com Numpy
+arr15 = np.arange(1, 10)
+
+print("Soma dos elementos:", np.sum(arr15))
+print("Produto dos elementos:", np.prod(arr15))
+print("Soma acumulada dos elementos:", np.cumsum(arr15))
+
+# Cria 2 arrays
+arr16 = np.array([3, 2, 1])
+arr17 = np.array([1, 2, 3])
+
+# Soma dos arrays
+arr18 = np.add(arr16, arr17)
+print("Soma dos arrays:", arr18)
+
+# Para multiplicar duas matrizes Numpy, podemos usar a função dot() ou o operador @. Ambos os métodos executam a multiplicação matricial. O número de colunas da primeira matriz deve ser igual ao número de linhas segunda matriz.
+
+# Cria 2 matrizes
+arr19 = np.array([[1, 2], [3, 4]])
+arr20 = np.array([[5, 6], [0, 7]])
+print("Formato do array: linhas, colunas:", arr19.shape)
+print("Array 20:\n", arr20)
+
+# Multiplicando as duas matrizes
+arr21 = np.dot(arr19, arr20)
+print("\nMultiplicação das matrizes:\n", arr21)
+
+# %%
+# Slicing (Fatiamento) de Arrays NumPy
+arr22 = np.diag(np.arange(3))
+print(arr22)
+print("Elemento dos índice 1 e 1 =", arr22[1, 1])
+print("Linha 1:", arr22[1])
+print("Coluna 2:", arr22[:, 2])
+
+arr23 = np.arange(10)
+print("\nArray de 10 elementos:", arr23)
+
+# %%
+# Cria 2 arrays
+a = np.array([1, 2, 3, 4])
+b = np.array([4, 2, 2, 4])
+
+print("Comparação item a item: a == b", a == b)
+print("Comparação global: a == b", np.array_equal(a, b))
+print("Valor máximo do array a:", a.max())
+
+# Somando um valor a cada elemento do array
+c = np.array([1, 2, 3]) + 1.5
+print("Soma de c com 1.5 = ", c)
+
+arr24 = np.array([2.5, 3.5, 4.5])
+arr25 = np.around(arr24)
+print("Usando método around:" , arr25)
+
+# %%
+# O método flatten() com Numpy é usado para criar uma cópia dimensional (ou achatada) de um array multidimesional. Isso significa que todo método cria um novo array unidimensional, que contém que contém todos os elementos do array multidimensional, mas que está organizado em uma única linha seguindo a ordem dos elementos do array.
+arr26 = np.array([[1, 2, 3, 4], [5, 6, 7, 8]])
+print(arr26)
+
+# Achatando a matriz
+arr27 = arr26.flatten()
+print(arr27)
+
+arr28 = np.array([1, 2, 3])
+print()
+print("Repetindo valores 3 vezes:", np.repeat(arr28, 3))
+print("Repetindo os elementos:", np.tile(arr28, 3))
+
+arr29 = np.copy(arr28)
+print(arr29)
+
+# %%

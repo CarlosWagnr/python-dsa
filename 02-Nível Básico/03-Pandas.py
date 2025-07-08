@@ -94,3 +94,43 @@ df3 = df_dsa.query("229 < Valor_Venda < 1000")
 df3.head()
 
 # %%
+# Verificando a Ocorrência de Diversos Valores em Uma Coluna
+print("Linhas e Colunas do DataFrame:", df_dsa.shape)
+
+# Aplicando filtro na coluna Quantidade
+df_dsa[df_dsa["Quantidade"].isin([5, 7, 9, 11])]
+
+# %%
+# Operadores Lógicos Para Manipulação de Dados - &, |
+# Filtrando as vendas que ocorreram para o segmento de Home Office e na região South
+df_dsa[(df_dsa.Segmento == "Home Office") & (df_dsa.Regiao == "South")].head()
+
+
+# %%
+# Agrupamento de Dados em DataFrames com Group By
+df_dsa[["Segmento", "Regiao", "Valor_Venda"]].groupby(["Segmento", "Regiao"]).mean()
+
+# %%
+# Agregação Múltipla com Group By
+df_dsa[["Segmento", "Regiao", "Valor_Venda"]].groupby(["Segmento", "Regiao"]).agg(["mean", "std", "count"])
+
+# %%
+# Filtrando DataFrame com Base em Strings - str.startwith, str.endtwith
+df_dsa[df_dsa.Segmento.str.startswith("Con")].head()
+
+
+# %%
+# Split de Strings em DataFrame, dividindo o ID a cada '-'
+df_dsa["ID_Pedido"].str.split("-")
+
+# %%
+print("Extraindo o ano do ID_Pedido")
+df_dsa["ID_Pedido"].str.split("-").str[1].head()
+
+
+# %%
+# Fazemos o split da coluna e extrapimos o pitem na posição 2 (índice 1)
+df_dsa["Ano"] = df_dsa["ID_Pedido"].str.split("-").str[1]
+df_dsa
+
+# %%

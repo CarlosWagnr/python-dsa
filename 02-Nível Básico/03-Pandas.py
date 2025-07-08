@@ -134,3 +134,55 @@ df_dsa["Ano"] = df_dsa["ID_Pedido"].str.split("-").str[1]
 df_dsa
 
 # %%
+# Strip de Strings em DataFrame. O Strip remove caracteres da string - lstrip, rstrip, strip().
+df_dsa["Data_Pedido"].head(3)
+
+print("Deixando o ano com apenas 2 dígitos sem alterar o tipo da variável")
+df_dsa["Data_Pedido"].str.lstrip("20")
+
+# Como não usamos o inplace=True a mudança é somente na memória e não afeta o dataframe.
+
+# %%
+# Replace de Strings em DataFrames - substitui caracteres dentro de uma string
+print("Substituíndo os caracteres CG por AX na coluna 'ID_Cliente'.")
+df_dsa["ID_Cliente"] = df_dsa["ID_Cliente"].str.replace("CG", "AX")
+df_dsa.head()
+
+
+# %%
+# Combinação de Strings em DataFrames
+print("Concatenando strings.")
+df_dsa["Pedido_Segmento"] = df_dsa["ID_Pedido"].str.cat(df_dsa["Segmento"], sep="-")
+df_dsa.head()
+
+
+# %%
+# Construção de Gráficos a Partir de DataFrames
+# Instalar a versão exata do Scikit-learn
+#!pip install -q scikit-learn==1.2.1
+#import sklearn
+#sklearn.__version__
+#from sklearn.datasets import load_iris
+#data = load_iris()
+
+#import pandas as pd
+#df = pd.DataFrame(data["data"], columns = data["feature_names"])
+#df["species"] = data["target"]
+#df.head()
+
+#print("Para criar um gráfico de linhas com todas as variáveis do dataframe, basta fazer isso:")
+#df.plot()
+
+#print("Scatter plot com duas variáveis")
+#df.plot.scatter(x="sepal length (cm)", y="sepal width (cm)")
+
+
+#columns = ["sepal length (cm)", "petal length (cm)", "petal width (cm)", "sepal width (cm)"]
+#df[columns].plot.area()
+
+# Calculando a média das colunas agrupando pela coluna species e criamos um gráfico de barras com o resultado.
+#df.groupby("species").mean().plot.bar()
+
+# Contagem de classes da coluna species e plotamos em um gráfico de pizza
+#df.groupby("species").count().plot.pie(y="sepal length (cm)")
+

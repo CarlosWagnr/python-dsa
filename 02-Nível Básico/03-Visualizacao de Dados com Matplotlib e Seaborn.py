@@ -75,8 +75,59 @@ plt.scatter(x, y, label="Pontos", color="black", marker='o')
 plt.legend()
 plt.show()
 
+# %%
+# Gráfico de àrea Empilhada
+# Usados para visualizar a mudança relativa de diversas variáveis ao longo do tempo. Eles consistem em várias áreas coloridas empilhadas umas sobre as outras, onde a altura representa a magnitude da variável correspondnete e a largura representa a escala de tempo.
+dias = [1, 2, 3, 4, 5]
+dormir = [7, 8, 6, 77, 7]
+comer = [2, 3, 4, 5, 3]
+trabalhar = [7, 8, 7, 2, 2]
+passear = [ 8, 5, 7, 8, 13]
 
+plt.stackplot(dias, dormir, comer, trabalhar, passear, colors=["m", "c", "r", "k", "b"])
+plt.show()
 
+# %%
+# Gráfico de Pizza
+# Representa um círculo dividido em fatias que representa as proporções relativas das categorias.
+horas = [7, 2, 3, 9]
+atividades = ["dormir", "comer", "estudar", "trabalhar"]
+cores = ["olive", "lime", "violet", "royalblue"]
+
+plt.pie(horas, labels=atividades, colors=cores, startangle=90, shadow=True, explode=(0, 0.2, 0, 0))
+plt.show()
+
+# %%
+# Criando Gráficos Customizados com Pylab
+# Pylab é um módulo fornecido pela biblioteca Matplotlib que combina a funcionalidade do pacote Numpy com a funcionalidade do pacote pyplot. O módulo inclui muitas funções úteis para plotagem de gráficos, como funções para criar gráficos de linha, dispersão, barras, pizza, histograma e muito mais.
+from pylab import *
+
+# Gráfico de Linha - Usado para representar a evolução de um comportamento de uma variável com diferentes pontos de dados. São usados para visualizar tendências e padrões em dados contínuos ao longo do tempo.
+x = linspace(0, 5, 10)
+y = x ** 2
+
+fig = plt.figure()
+axes = fig.add_axes([0, 0, 0.8, 0.8])
+
+axes.plot(x, y, "r")
+axes.set_xlabel('x')
+axes.set_ylabel('y')
+axes.set_title("Gráfico de Linha")
 
 
 # %%
+# Histograma - Utilizado para visualizar a distribuição de uma variável contínua. Eles são compostos por barras retângulares adjacentes, onde a área de cada barra é proporcional à frequência de observações de dados que caem em uma faixa específica de valores.
+#import numpy as np
+n = np.random.randn(100000)
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+
+# Plot 1
+axes[0].hist(n)
+axes[0].set_title("Histograma Padrão")
+axes[0].set_xlim((min(n), max(n)))
+
+# Plot 2
+axes[1].hist(n, cumulative=True, bins=50)
+axes[1].set_title("Histograma Cumulativo")
+axes[1].set_xlim((min(n), max(n)))
+

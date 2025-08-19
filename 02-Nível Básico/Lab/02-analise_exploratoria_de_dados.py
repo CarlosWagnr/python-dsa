@@ -131,15 +131,135 @@ print("No total 457 Vendas Receberiam Desconto de 15%.")
 # %%
 # 08- Considere  Que  a  Empresa  Decida  Conceder  o  Desconto  de  15%  do  Item  Anterior.
 # Qual Seria a Média do Valor de Venda Antes e Depois do Desconto?
+# - Criamos uma coluna calculando o valor de venda menos o desconto
+df_dsa["Valor_Venda_Desconto"] = df_dsa["Valor_Venda"] - (df_dsa["Valor_Venda"] * df_dsa["Desconto"])
+df_dsa.head()
 
+# Filtrando as vendas antes do desconto de 15%
+df_dsa_p8_vendas_antes_desconto = df_dsa.loc[df_dsa["Desconto"] == 0.15, "Valor_Venda"]
+
+# Filtrando as vendas depois do desconto de 15%
+df_dsa_p8_vendas_depois_desconto = df_dsa.loc[df_dsa["Desconto"] == 0.15, "Valor_Venda_Desconto"]
+
+# Calcula a média das vendas antes do desconto de 15%
+media_vendas_antes_desconto = df_dsa_p8_vendas_antes_desconto.mean()
+
+# Calcula a média das vendas depois do desconto de 15%
+media_vendas_depois_desconto = df_dsa_p8_vendas_depois_desconto.mean()
+
+print("Média das vendas antes do desconto de 15%:", round(media_vendas_antes_desconto, 2))
+print("Média das vendas depois do desconto de 15%:", round(media_vendas_depois_desconto, 2))
 
 
 # %%
 # 09- Qual o Média de Vendas Por Segmento, Por Ano e Por Mês?
 # Demonstre o resultado através de gráfico de linha.
 
+# Extraimos o mês e gravamos em uma nova variável
+df_dsa["Mes"] = df_dsa["Data_Pedido"].dt.month
+df_dsa.head()
+
+# Agrupamento por ano, mês e segmento e calculamos estatísticas de agregação
+df_dsa_p9 = df_dsa.groupby(["Ano", "Mes", "Segmento"])["Valor_Venda"].agg([np.sum, np.mean, np.median])
+df_dsa_p9
+
+# Vamos extrair os níveis
+anos = df_dsa_p9.index.get_level_values(0)
+meses = df_dsa_p9.index.get_level_values(1)
+segmento = df_dsa_p9.index.get_level_values(2)
+
+# plot
+#plt.figure(figsize = (12, 6))
+#sns.set()
+#figl = sns.relplot(kind = 'line',
+#                   data = df_dsa_p9,
+#                   y = 'mean',
+#                   x = meses,
+#                   hue = segmento,
+#                   col = anos,
+#                   col_wrap = 4
+#                   )
+#
+#plt.show()
+
 
 
 # %%
 # 10- Qual o Total de Vendas Por Categoria e SubCategoria, Considerando Somente as Top 12 SubCategorias?
 # Demonstre tudo através de um único gráfico
+df_dsa.head()
+
+# Agrupamos por categoria e subcategoria e calculamos a soma somente para variáveis numéricas
+df_dsa_p10 = df_dsa.groupby(["Categoria", "SubCategoria"]).sum(numeric_only = True).sort_values("Valor_Venda", ascending=False).head(12)
+#df_dsa_p10.head()
+
+# Convertemos a coluna Valor_Venda em número inteiro e classificamos por categoria
+df_dsa_p10 = df_dsa_p10[["Valor_Venda"]].astype(int).sort_values(by = "Categoria").reset_index()
+
+# OBS: Classificar o item por categoria é importante para preencher o gráfico com as subcategorias para cada categoria de forma ordenada.
+df_dsa_p10.head(10)
+
+
+# %%
+# Criamos outro dataframe somente com os totais por categoria
+df_dsa_p10_cat = df_dsa_p10.groupby("Categoria").sum(numeric_only=True).reset_index()
+df_dsa_p10_cat
+
+
+
+# %%
+# Lista de cores para categoria
+cores_categorias = ["#5d00de",
+                    "#0ee84f",
+                    "#e80e27"]
+
+# Lista de cores para Subcategorias
+cores_subcategorias = ["#aa8cd4",
+                       "#aa8cd5",
+                       "#aa8cd6",
+                       "#aa8cd7",
+                       "#26c957",
+                       "#26c958",
+                       "#26c959",
+                       "#26c960",
+                       "#e65e65",
+                       "#e65e66",
+                       "#e65e67",
+                       "#e65e68",]
+
+# Plot
+
+# Tamanho da figura
+fig, ax = plt.subplots(figsize = (18, 12))
+
+# Gráfico por categoria
+p1 = ax.pie(df_dsa_p10_cat["Valor_Venda"],
+            radius = 1,
+            labels = df_dsa_p10_cat["Categoria"],
+            wedgeprops=dict(edgecolor =  "white"),
+            colors = cores_categorias)
+
+# Gráfico das subcategorias
+p2 = ax.pie(df_dsa_p10["Valor_Venda"],
+            radius = 0.9,
+            labels = df_dsa_p10["SubCategoria"],
+            autopct=autopct_format(df_dsa_p10["Valor_Venda"]),
+            colors=cores_subcategorias,
+            labeldistance= 0.7,
+            wedgeprops=dict(edgecolor =  "white"),
+            pctdistance=0.53,
+            rotatelabels=True)
+
+# Limpa o centro do circulo
+centre_circle = plt.Circle((0, 0), 0.6, fc = "white")
+
+# Labels e anotações
+fig = plt.gcf()
+fig.gca().add_artist(centre_circle)
+plt.annotate(text="Total de Vendas: " + "$ " + str(int(sum(df_dsa_p10["Valor_Venda"]))), xy = (-0.2, 0))
+plt.title("Total de Vendas Por Categoria e Top 12 SubCategorias")
+plt.show()
+
+
+
+# %%
